@@ -1,11 +1,14 @@
 import express from 'express';
 import { config } from './config.js';
+import helmet from 'helmet';
+import cors from 'cors';
+import morgan from 'morgan';
 
 const app = express();
 
-app.get('/test', (req, res, next) => {
-  console.log('hello');
-  res.status(200).json({ text: 'hello world!' });
-});
+app.use(express.json());
+app.use(helmet());
+app.use(cors());
+app.use(morgan('tiny'));
 
 app.listen(config.host.port);
